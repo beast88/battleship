@@ -8,25 +8,26 @@ const gameboard = () => {
 		}
 	}
 
-	// const pieces = {
-	// 	carrier: 5,
-	// 	battleship: 4,
-	// 	submarine: 3,
-	// 	cruiser: 3,
-	// 	destroyer: 2
-	// }
-
 	return {
 		board: grid,
 
-		placeShip(loc, length) {
+		placeShip(loc, length, axis) {
 			let currentLoc = loc
 
-			//x- axis
-			for(var i = 0; i < length; i++) {
-				grid[currentLoc].hasShip = true
-				currentLoc++
+			//need a function to test the axis
+
+			if(axis === 'x'){
+				for(var i = 0; i < length; i++) {
+					grid[currentLoc].hasShip = true
+					currentLoc++
+				}				
+			} else if(axis === 'y') {
+				for(var j = 0; j < length; j++) {
+					grid[currentLoc].hasShip = true
+					currentLoc = currentLoc + 8
+				}
 			}
+
 		}
 	}
 }
