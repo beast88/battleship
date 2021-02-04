@@ -4,6 +4,7 @@ import shipTypes from '../GameHelpers/shipTypes'
 describe('Test Gameboard functions', () => {
 	let testGameboard;
 	let destroyer = shipTypes[4]
+	let battleship = shipTypes[1]
 
 	beforeEach(() => {
 		testGameboard = gameboard();
@@ -38,5 +39,35 @@ describe('Test Gameboard functions', () => {
 		testGameboard.placeShip(5, destroyer.length, 'y');
 		testGameboard.placeShip(12, destroyer.length, 'x');
 		expect(testGameboard.board[12].hasShip).toEqual(false)
+	})
+
+	it('Should not place a ship on the wall of the board (x-axis)', () => {
+		testGameboard.placeShip(7, destroyer.length, 'x');
+		expect(testGameboard.board[7].hasShip).toEqual(false)
+	})
+
+	it('Should place a ship if the last cell of the ship is adjacent to the wall (x-axis)', () => {
+		testGameboard.placeShip(6, destroyer.length, 'x');
+		expect(testGameboard.board[7].hasShip).toEqual(true)
+	})
+
+	it('Should not place a longer ship if a collision with the wall occurs (x-axis)', () => {
+		testGameboard.placeShip(6, battleship.length, 'x');
+		expect(testGameboard.board[6].hasShip).toEqual(false)
+	})
+
+	it('Should not place a ship on the wall of the board (y-axis)', () => {
+		testGameboard.placeShip(56, destroyer.length, 'y');
+		expect(testGameboard.board[56].hasShip).toEqual(false)
+	})
+
+	it('Should place a ship if the last cell of the ship is adjacent to the wall (y-axis)', () => {
+		testGameboard.placeShip(55, destroyer.length, 'y');
+		expect(testGameboard.board[63].hasShip).toEqual(true)
+	})
+
+	it('Should not place a longer ship if a collision with the wall occurs (y-axis)', () => {
+		testGameboard.placeShip(47, battleship.length, 'y');
+		expect(testGameboard.board[47].hasShip).toEqual(false);
 	})
 })
