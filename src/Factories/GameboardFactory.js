@@ -40,7 +40,7 @@ const gameboard = () => {
 		} else if(axis === 'y') {
 			for(var j = 0; j < length; j++) {
 
-				//if the current cell exceeds the max number of cells & this is not the last 'cell' of the ship being placed
+				//if the next iteration exceeds the max number of cells & this is not the last 'cell' of the ship being placed
 				if(currentLoc + 8 > 63 && j < length - 1) {
 					//A collision with the bottom wall of the board has occured
 					collision = true
@@ -62,6 +62,10 @@ const gameboard = () => {
 
 	return {
 		board: grid,
+
+		receiveAttack(loc) {
+			grid[loc].isHit = true
+		},
 
 		placeShip(loc, length, axis) {
 			let currentLoc = loc

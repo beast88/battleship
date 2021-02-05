@@ -68,6 +68,11 @@ describe('Test Gameboard functions', () => {
 
 	it('Should not place a longer ship if a collision with the wall occurs (y-axis)', () => {
 		testGameboard.placeShip(47, battleship.length, 'y');
-		expect(testGameboard.board[47].hasShip).toEqual(false);
+		expect(testGameboard.board[47].hasShip).toEqual(false)
+	})
+
+	it('Cell should record when it recieved a shot', () => {
+		testGameboard.receiveAttack(0);
+		expect(testGameboard.board[0].isHit).toEqual(true)
 	})
 })
