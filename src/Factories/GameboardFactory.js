@@ -8,6 +8,8 @@ const gameboard = () => {
 		}
 	}
 
+	let missed = []
+
 	const collisionCheck = (loc, length, axis) => {
 		let currentLoc = loc
 		let collision = false
@@ -62,9 +64,11 @@ const gameboard = () => {
 
 	return {
 		board: grid,
+		missedShots: missed,
 
 		receiveAttack(loc) {
 			grid[loc].isHit = true
+			missed.push(loc)
 		},
 
 		placeShip(loc, length, axis) {

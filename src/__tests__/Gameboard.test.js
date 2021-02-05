@@ -75,4 +75,16 @@ describe('Test Gameboard functions', () => {
 		testGameboard.receiveAttack(0);
 		expect(testGameboard.board[0].isHit).toEqual(true)
 	})
+
+	it('Records the co-ordinates of a missed shots', () => {
+		testGameboard.receiveAttack(0);
+		expect(testGameboard.missedShots).toEqual([0])
+	})
+
+	it('Records the co-ordinates of multiple missed shots', () => {
+		testGameboard.receiveAttack(0);
+		testGameboard.receiveAttack(15);
+		testGameboard.receiveAttack(10);
+		expect(testGameboard.missedShots).toEqual([0, 15, 10])
+	})
 })
