@@ -11,7 +11,7 @@ describe('Test Gameboard functions', () => {
 	})
 
 	it('Test random cell to see if it has been generated', () => {
-		expect(testGameboard.board[23]).toEqual({isHit: false, hasShip: false})
+		expect(testGameboard.board[23]).toEqual({isHit: false, hasShip: false, ship: null})
 	})
 
 	it('Assigns a ship to a cell', () => {
@@ -21,6 +21,12 @@ describe('Test Gameboard functions', () => {
 
 	it('Assigns multiple cells to ships', () => {
 		testGameboard.placeShip(0, destroyer, 'x');
+		expect(testGameboard.board[1].hasShip).toEqual(true)
+	})
+
+	it('Random test to ensure placing ships works', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.placeShip(10, battleship, 'y');
 		expect(testGameboard.board[1].hasShip).toEqual(true)
 	})
 

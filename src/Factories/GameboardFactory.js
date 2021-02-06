@@ -1,10 +1,13 @@
+import ship from './ShipFactory'
+
 const gameboard = () => {
 	const grid = new Array(64)
 
 	for(var i = 0; i < grid.length; i++) {
 		grid[i] = {
 			isHit: false,
-			hasShip: false
+			hasShip: false,
+			ship: null
 		}
 	}
 
@@ -100,21 +103,24 @@ const gameboard = () => {
 		placeShip(loc, shipType, axis) {
 			let currentLoc = loc
 
-			//Function to get the ship locations
+			//Function to get the ship locations as an array
 			let locations = shipLocation(loc, shipType.length, axis)
 
 			if(collisionCheck(locations, axis) === false){
 
 				//Generate the ship from factory
+				const newShip = ship(shipType.name, locations)
 
 				if(axis === 'x'){
 					for(var i = 0; i < shipType.length; i++) {
 						grid[currentLoc].hasShip = true
+						grid[currentLoc].ship = newShip
 						currentLoc++
 					}				
 				} else if(axis === 'y') {
 					for(var j = 0; j < shipType.length; j++) {
 						grid[currentLoc].hasShip = true
+						grid[currentLoc].ship = newShip
 						currentLoc = currentLoc + 8
 					}
 				}
