@@ -30,6 +30,17 @@ describe('Test Gameboard functions', () => {
 		expect(testGameboard.board[1].hasShip).toEqual(true)
 	})
 
+	it('Should create and assign a ship class to a cell', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		expect(testGameboard.board[1].ship.name).toEqual('destroyer')
+	})
+
+	it('Should create seperate ships classes', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.placeShip(7, battleship, 'y');
+		expect(testGameboard.board[15].ship.name).toEqual('battleship')
+	})
+
 	it('Places ships on the y axis', () => {
 		testGameboard.placeShip(0, destroyer, 'y');
 		expect(testGameboard.board[8].hasShip).toEqual(true)
@@ -93,4 +104,6 @@ describe('Test Gameboard functions', () => {
 		testGameboard.receiveAttack(10);
 		expect(testGameboard.missedShots).toEqual([0, 15, 10])
 	})
+
+	//merge the latest branch on the main branch
 })
