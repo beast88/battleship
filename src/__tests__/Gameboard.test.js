@@ -15,59 +15,59 @@ describe('Test Gameboard functions', () => {
 	})
 
 	it('Assigns a ship to a cell', () => {
-		testGameboard.placeShip(0, destroyer.length, 'x');
+		testGameboard.placeShip(0, destroyer, 'x');
 		expect(testGameboard.board[0].hasShip).toEqual(true)
 	})
 
 	it('Assigns multiple cells to ships', () => {
-		testGameboard.placeShip(0, destroyer.length, 'x');
+		testGameboard.placeShip(0, destroyer, 'x');
 		expect(testGameboard.board[1].hasShip).toEqual(true)
 	})
 
 	it('Places ships on the y axis', () => {
-		testGameboard.placeShip(0, destroyer.length, 'y');
+		testGameboard.placeShip(0, destroyer, 'y');
 		expect(testGameboard.board[8].hasShip).toEqual(true)
 	})
 
 	it('Should not be able to place a ship if a cell is already a ship', () => {
-		testGameboard.placeShip(0, destroyer.length, 'x');
-		testGameboard.placeShip(0, destroyer.length, 'y');
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.placeShip(0, destroyer, 'y');
 		expect(testGameboard.board[8].hasShip).toEqual(false)
 	})
 
 	it('Should not place a ship if the ship will collide with another ship', () => {
-		testGameboard.placeShip(5, destroyer.length, 'y');
-		testGameboard.placeShip(12, destroyer.length, 'x');
+		testGameboard.placeShip(5, destroyer, 'y');
+		testGameboard.placeShip(12, destroyer, 'x');
 		expect(testGameboard.board[12].hasShip).toEqual(false)
 	})
 
 	it('Should not place a ship on the wall of the board (x-axis)', () => {
-		testGameboard.placeShip(7, destroyer.length, 'x');
+		testGameboard.placeShip(7, destroyer, 'x');
 		expect(testGameboard.board[7].hasShip).toEqual(false)
 	})
 
 	it('Should place a ship if the last cell of the ship is adjacent to the wall (x-axis)', () => {
-		testGameboard.placeShip(6, destroyer.length, 'x');
+		testGameboard.placeShip(6, destroyer, 'x');
 		expect(testGameboard.board[7].hasShip).toEqual(true)
 	})
 
 	it('Should not place a longer ship if a collision with the wall occurs (x-axis)', () => {
-		testGameboard.placeShip(6, battleship.length, 'x');
+		testGameboard.placeShip(6, battleship, 'x');
 		expect(testGameboard.board[6].hasShip).toEqual(false)
 	})
 
 	it('Should not place a ship on the wall of the board (y-axis)', () => {
-		testGameboard.placeShip(56, destroyer.length, 'y');
+		testGameboard.placeShip(56, destroyer, 'y');
 		expect(testGameboard.board[56].hasShip).toEqual(false)
 	})
 
 	it('Should place a ship if the last cell of the ship is adjacent to the wall (y-axis)', () => {
-		testGameboard.placeShip(55, destroyer.length, 'y');
+		testGameboard.placeShip(55, destroyer, 'y');
 		expect(testGameboard.board[63].hasShip).toEqual(true)
 	})
 
 	it('Should not place a longer ship if a collision with the wall occurs (y-axis)', () => {
-		testGameboard.placeShip(47, battleship.length, 'y');
+		testGameboard.placeShip(47, battleship, 'y');
 		expect(testGameboard.board[47].hasShip).toEqual(false)
 	})
 

@@ -10,53 +10,79 @@ const gameboard = () => {
 
 	let missed = []
 
-	const collisionCheck = (loc, length, axis) => {
+	const shipLocation = (loc, length, axis) => {
 		let currentLoc = loc
+		let locations = []
+
+		if(axis === 'x'){
+			for(var i = 0; i < length; i++){
+				locations.push(currentLoc)
+				currentLoc++
+			}
+		} else if(axis === 'y'){
+			for(var j = 0; j < length; j++){
+				locations.push(currentLoc)
+				currentLoc = currentLoc + 8
+			}
+		}
+
+		return locations
+	}
+
+	const checkWallCollision = (locations, axis) => {
 		let collision = false
-		const xWall = [7, 15, 23, 31, 39, 47, 55, 63]
+		let xWall = [7, 15, 23, 31, 39, 47, 55, 63]
 
-		//Check the axis
-		if(axis === 'x') {
-			//Loop through the cells that the ship will occupy
-			for(var i = 0; i < length; i++) {
+		//Deal with wall collisions
+		//if axis is x
+		if(axis === 'x'){
 
-				//If the cell is currently a ship, collision has occured, break the loop
-				if(grid[currentLoc].hasShip === true) {
+			//Iterate through the locations array except the last one
+			for(var i = 0; i < locations.length - 1; i++){
+				//If this location is in the xWall array then a collision has occured
+				if(xWall.includes(locations[i]) === true){
 					collision = true
 					break;
-				} else if(grid[currentLoc].hasShip === false) {
-
-					//If this is the last cell of the ship then there has been no collision
-					if(i === length - 1) {
-						collision = false
-					//otherwise if current location is included in the xWall then a collision has occured
-					} else if(xWall.includes(currentLoc)) {
-						collision = true
-						break;
-					}
-
-					//If no collision has occured in the current cell then move onto the next
-					currentLoc++
 				}
 			}
-		} else if(axis === 'y') {
-			for(var j = 0; j < length; j++) {
 
-				//if the next iteration exceeds the max number of cells & this is not the last 'cell' of the ship being placed
-				if(currentLoc + 8 > 63 && j < length - 1) {
-					//A collision with the bottom wall of the board has occured
+		} else if(axis === 'y'){
+
+			//Iterate through the locations array except the last one
+			for(var j = 0; j < locations.length - 1; j++){
+				//If this location + 8 exceeds the max size of the board then a collision has occured
+				if(locations[j] + 8 > 63){
 					collision = true
 					break;
-				}
-
-				if(grid[currentLoc].hasShip === true) {
-					collision = true
-					break;
-
-				} else if(grid[currentLoc].hasShip === false) {
-					currentLoc = currentLoc + 8
 				}
 			}
+
+		}
+
+		return collision
+	}
+
+	const checkShipCollision = (locations) => {
+		let collision = false
+
+		locations.forEach((loc) => {
+			if(grid[loc].hasShip === true){
+				collision = true
+			}
+		})
+
+		return collision
+	}
+
+	const collisionCheck = (locations, axis) => {
+		let collision = false
+
+		if(checkWallCollision(locations, axis) === false){
+			if(checkShipCollision(locations) === true){
+				collision = true
+			}
+		} else if(checkWallCollision(locations, axis) === true){
+			collision = true
 		}
 
 		return collision
@@ -71,18 +97,23 @@ const gameboard = () => {
 			missed.push(loc)
 		},
 
-		placeShip(loc, length, axis) {
+		placeShip(loc, shipType, axis) {
 			let currentLoc = loc
 
-			if(collisionCheck(loc, length, axis) === false){
+			//Function to get the ship locations
+			let locations = shipLocation(loc, shipType.length, axis)
+
+			if(collisionCheck(locations, axis) === false){
+
+				//Generate the ship from factory
 
 				if(axis === 'x'){
-					for(var i = 0; i < length; i++) {
+					for(var i = 0; i < shipType.length; i++) {
 						grid[currentLoc].hasShip = true
 						currentLoc++
 					}				
 				} else if(axis === 'y') {
-					for(var j = 0; j < length; j++) {
+					for(var j = 0; j < shipType.length; j++) {
 						grid[currentLoc].hasShip = true
 						currentLoc = currentLoc + 8
 					}
