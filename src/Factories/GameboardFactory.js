@@ -1,6 +1,7 @@
 import ship from './ShipFactory'
 
 const gameboard = () => {
+	//Generate the gameboard
 	const grid = new Array(64)
 
 	for(var i = 0; i < grid.length; i++) {
@@ -11,14 +12,16 @@ const gameboard = () => {
 		}
 	}
 
+	//Store missed shots
 	let missed = []
-
+	//Store confirmed hits
 	let hits = []
 
 	const shipLocation = (loc, length, axis) => {
 		let currentLoc = loc
 		let locations = []
 
+		//Generate an array containing the cells the ship will occupy
 		if(axis === 'x'){
 			for(var i = 0; i < length; i++){
 				locations.push(currentLoc)
