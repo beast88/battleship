@@ -10,12 +10,14 @@ describe('Ship functions', () => {
 	})
 
 	it('Accepts a hit', () => {
-		expect(testCarrier.hit(0)).toEqual([0])
+		testCarrier.hit(0);
+		expect(testCarrier.hits).toEqual([0])
 	})
 
 	it('Accepts multiple hits', () => {
 		testSubmarine.hit(11);
-		expect(testSubmarine.hit(21)).toEqual([11, 21])
+		testSubmarine.hit(21);
+		expect(testSubmarine.hits).toEqual([11, 21])
 	})
 
 	it('Reports that a ship has not sunk', () => {

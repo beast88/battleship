@@ -1,17 +1,17 @@
 const ship = (name, length) => {
-	let hits = []
+	let damage = []
 
 	return {
 		name: name,
 		length: length,
+		hits: damage,
 
 		hit(loc) {
-			hits.push(loc)
-			return hits
+			damage.push(loc)
 		},
 
 		isSunk() {
-			if(hits.length === length.length) {
+			if(damage.length === length.length) {
 				return true
 			} else {
 				return false

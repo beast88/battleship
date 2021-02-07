@@ -104,4 +104,10 @@ describe('Test Gameboard functions', () => {
 		testGameboard.receiveAttack(10);
 		expect(testGameboard.missedShots).toEqual([0, 15, 10])
 	})
+
+	it('Calls the ships hit function if the cell contains a ship', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.receiveAttack(0);
+		expect(testGameboard.board[0].ship.hit).toEqual([0])
+	})
 })
