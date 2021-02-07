@@ -104,6 +104,4 @@ describe('Test Gameboard functions', () => {
 		testGameboard.receiveAttack(10);
 		expect(testGameboard.missedShots).toEqual([0, 15, 10])
 	})
-
-	//merge the latest branch on the main branch
 })

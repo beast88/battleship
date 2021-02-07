@@ -101,7 +101,6 @@ const gameboard = () => {
 		},
 
 		placeShip(loc, shipType, axis) {
-			let currentLoc = loc
 
 			//Function to get the ship locations as an array
 			let locations = shipLocation(loc, shipType.length, axis)
@@ -111,19 +110,10 @@ const gameboard = () => {
 				//Generate the ship from factory
 				const newShip = ship(shipType.name, locations)
 
-				if(axis === 'x'){
-					for(var i = 0; i < shipType.length; i++) {
-						grid[currentLoc].hasShip = true
-						grid[currentLoc].ship = newShip
-						currentLoc++
-					}				
-				} else if(axis === 'y') {
-					for(var j = 0; j < shipType.length; j++) {
-						grid[currentLoc].hasShip = true
-						grid[currentLoc].ship = newShip
-						currentLoc = currentLoc + 8
-					}
-				}
+				locations.forEach((cell) => {
+					grid[cell].hasShip = true
+					grid[cell].ship = newShip
+				})
 
 			} else {
 				return
