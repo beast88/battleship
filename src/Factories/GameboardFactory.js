@@ -13,6 +13,8 @@ const gameboard = () => {
 
 	let missed = []
 
+	let hits = []
+
 	const shipLocation = (loc, length, axis) => {
 		let currentLoc = loc
 		let locations = []
@@ -94,10 +96,22 @@ const gameboard = () => {
 	return {
 		board: grid,
 		missedShots: missed,
+		confirmedHits: hits,
 
 		receiveAttack(loc) {
-			grid[loc].isHit = true
-			missed.push(loc)
+			if(grid[loc].isHit === false){
+				grid[loc].isHit = true
+
+				if(grid[loc].ship != null){
+					grid[loc].ship.hit(loc)
+					hits.push(loc)
+				} else {
+					missed.push(loc)
+				}
+
+			} else {
+				return
+			}
 		},
 
 		placeShip(loc, shipType, axis) {

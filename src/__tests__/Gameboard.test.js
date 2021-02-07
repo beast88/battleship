@@ -108,6 +108,26 @@ describe('Test Gameboard functions', () => {
 	it('Calls the ships hit function if the cell contains a ship', () => {
 		testGameboard.placeShip(0, destroyer, 'x');
 		testGameboard.receiveAttack(0);
-		expect(testGameboard.board[0].ship.hit).toEqual([0])
+		expect(testGameboard.board[0].ship.hits).toEqual([0])
 	})
+
+	it('Confirms ships can be accessed via their other cells on the board', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.receiveAttack(0);
+		expect(testGameboard.board[1].ship.hits).toEqual([0])
+	})
+
+	it('Records the co-ordinates of hits on ships', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.receiveAttack(0);
+		expect(testGameboard.confirmedHits).toEqual([0])
+	})
+
+	it('Should do nothing if a cell has already been attacked', () => {
+		testGameboard.receiveAttack(0);
+		testGameboard.receiveAttack(0);
+		expect(testGameboard.missedShots).toEqual([0])
+	})
+
+	//Should report when a ship has been sunk
 })
