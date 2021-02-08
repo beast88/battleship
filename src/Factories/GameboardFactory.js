@@ -157,8 +157,24 @@ const gameboard = () => {
 			} else {
 				return
 			}
+		},
 
+		validTargets() {
+			//Generate an array of all targets
+			let allTargets = new Array(64)
 
+			for(var i = 0; i < allTargets.length; i++){
+				allTargets[i] = i
+			}
+
+			//Get an array of all the shots fired so far
+			let allHits = missed.concat(hits)
+
+			//Filter all the targets and return a list of valid targets
+			let valid = allTargets.filter(n => !allHits.includes(n))
+
+			console.log(valid)
+			return valid
 		}
 	}
 }
