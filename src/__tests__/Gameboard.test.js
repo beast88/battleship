@@ -129,5 +129,51 @@ describe('Test Gameboard functions', () => {
 		expect(testGameboard.missedShots).toEqual([0])
 	})
 
-	//Should report when a ship has been sunk
+	it('Should report when a ship has been sunk', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.receiveAttack(0);
+		testGameboard.receiveAttack(1);
+		expect(testGameboard.sunkShips).toEqual(['destroyer'])
+	})
+
+	it('Should not report if a ship is a sunk when it is not sunk', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.receiveAttack(1);
+		expect(testGameboard.sunkShips).toEqual([])
+	})
+
+	it('Should report when multiple ships have been sunk', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.placeShip(7, battleship, 'y');
+		testGameboard.receiveAttack(0);
+		testGameboard.receiveAttack(1);
+		testGameboard.receiveAttack(7);
+		testGameboard.receiveAttack(15);
+		testGameboard.receiveAttack(23);
+		testGameboard.receiveAttack(31);
+		expect(testGameboard.sunkShips).toEqual(['destroyer', 'battleship'])
+	})
+
+	it('Should report when all ships have been sunk', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.placeShip(7, battleship, 'y');
+		testGameboard.receiveAttack(0);
+		testGameboard.receiveAttack(1);
+		testGameboard.receiveAttack(7);
+		testGameboard.receiveAttack(15);
+		testGameboard.receiveAttack(23);
+		testGameboard.receiveAttack(31);
+		expect(testGameboard.allSunk()).toEqual(true)
+	})
+
+	it('Should not report all ships as sunk if there is still a ship on the board', () => {
+		testGameboard.placeShip(0, destroyer, 'x');
+		testGameboard.placeShip(7, battleship, 'y');
+		testGameboard.receiveAttack(0);
+		testGameboard.receiveAttack(1);
+		testGameboard.receiveAttack(7);
+		testGameboard.receiveAttack(15);
+		testGameboard.receiveAttack(23);
+		expect(testGameboard.allSunk()).toEqual(false)
+	})
 })

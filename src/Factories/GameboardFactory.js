@@ -17,6 +17,11 @@ const gameboard = () => {
 	//Store confirmed hits
 	let hits = []
 
+	//Store an array of placed ships
+	let placedShips = []
+	//Store an array of sunk ships
+	let sunk = []
+
 	const shipLocation = (loc, length, axis) => {
 		let currentLoc = loc
 		let locations = []
@@ -100,6 +105,15 @@ const gameboard = () => {
 		board: grid,
 		missedShots: missed,
 		confirmedHits: hits,
+		sunkShips: sunk,
+
+		allSunk() {
+			if(sunk.length === placedShips.length){
+				return true
+			} else {
+				return false
+			}
+		},
 
 		receiveAttack(loc) {
 			if(grid[loc].isHit === false){
@@ -108,6 +122,12 @@ const gameboard = () => {
 				if(grid[loc].ship != null){
 					grid[loc].ship.hit(loc)
 					hits.push(loc)
+
+					//Check if the ship has been sunk
+					if(grid[loc].ship.isSunk() === true){
+						sunk.push(grid[loc].ship.name)
+					}
+
 				} else {
 					missed.push(loc)
 				}
@@ -131,6 +151,8 @@ const gameboard = () => {
 					grid[cell].hasShip = true
 					grid[cell].ship = newShip
 				})
+
+				placedShips.push(newShip.name)
 
 			} else {
 				return
