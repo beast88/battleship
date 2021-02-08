@@ -1,13 +1,11 @@
 import gameboard from './GameboardFactory'
 
 const player = () => {
-
-	let board = gameboard();
 	
 	return {
-		board: board,
+		board: gameboard(),
 
-		fireShot(loc) {
+		fireShot(board, loc) {
 			board.receiveAttack(loc)
 		}
 	}
