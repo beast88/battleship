@@ -13,4 +13,9 @@ describe('Test player functions', () => {
 		testPlayer1.fireShot(testPlayer2.board, 0);
 		expect(testPlayer2.board.missedShots).toEqual([0])
 	})
+
+	it('Allows AI to fire a shot at random', () => {
+		testPlayer2.AIFireShot(testPlayer1.board)
+		expect(testPlayer1.board.missedShots.length).toBe(1)
+	})
 })

@@ -173,7 +173,6 @@ const gameboard = () => {
 			//Filter all the targets and return a list of valid targets
 			let valid = allTargets.filter(n => !allHits.includes(n))
 
-			console.log(valid)
 			return valid
 		}
 	}
