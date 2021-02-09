@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Board from './Board'
 import player from '../Factories/PlayerFactory'
 
 const GameController = () => {
@@ -15,7 +16,8 @@ const GameController = () => {
 	return(
 		<div className="game-container">
 			<h1>Hello World</h1>
-			{console.log(player1.player.board.board)}
+			<Board board={player1.player.board} />
+			<Board board={player2.player.board} />
 		</div>
 	)
 }
