@@ -4,22 +4,41 @@ import Board from './Board'
 
 const GameController = () => {
 	let player1 = player()
-	let computer = player()
 
-	const [currentPlayer, setCurrentPlayer] = useState(player1)
+	const [computer, setComputer] = useState(player())
+
+	const [currentPlayer, setCurrentPlayer] = useState("player")
 
 	const switchPlayer = () => {
 		setCurrentPlayer(
-			currentPlayer === player1 ? computer : player1
+			currentPlayer === "player" ? "computer" : "player"
 		)
+
+		setComputer(computer)
+
+		console.log(computer)
 	}
 
-	console.log(switchPlayer, player1)
+	const handleClick = (loc) => {
+		if(currentPlayer === "player"){
+			player1.fireShot(computer.board, loc)
+			switchPlayer()
+		}
+	}
+
+	console.log(player1, computer, switchPlayer)
 
 	return(
 		<div className="game-container">
-			<h1>Hello World</h1>
-			<Board board={player1.board} />
+			<Board 
+				board={player1.board}
+				
+			/>
+
+			<Board
+				board={computer.board}
+				handleClick={handleClick} 
+			/>
 		</div>
 	)
 }

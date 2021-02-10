@@ -10,8 +10,9 @@ h1 {
 	
 }
 
-.ship-placements {
+.game-container {
 	display: flex;
+	justify-content: space-between;
 }
 
 .player-board {

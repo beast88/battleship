@@ -4,7 +4,13 @@ import PropTypes from 'prop-types'
 const Board = (props) => {
 
 	let cells = props.board.board.map((cell, index) => {
-		return <div className="cell" key={index} ></div>
+		const hit = cell.isHit ? {background: 'red'} : {}
+		return <div 
+					className="cell" 
+					key={index} 
+					onClick={() => {props.handleClick(index)}}
+					style={hit} 
+				></div>
 	})
 
 	return (
@@ -15,7 +21,8 @@ const Board = (props) => {
 }
 
 Board.propTypes = {
-	board: PropTypes.any
+	board: PropTypes.any,
+	handleClick: PropTypes.any
 }
 
 export default Board
