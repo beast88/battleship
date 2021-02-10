@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 
 const Board = (props) => {
 
-	const cells = props.board.board.map((cell, index) => {
-		const ship = cell.hasShip === true ? {background: "red"} : {}
-		return <div className="cell" key={index} style={ship}></div>
+	let cells = props.board.board.map((cell, index) => {
+		return <div className="cell" key={index} ></div>
 	})
 
 	return (

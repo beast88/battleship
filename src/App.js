@@ -1,10 +1,10 @@
 import React from 'react'
-import Init from './Components/Init'
+import GameController from './Components/GameController'
 
 function App() {
   return (
     <div className="App">
-		<Init />
+		<GameController />
     </div>
   );
 }
