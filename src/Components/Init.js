@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GameSetUp = () => {
+const Init = () => {
 	return (
 		<div className="set-up">
 			<h1>Battleship</h1>
@@ -9,4 +9,4 @@ const GameSetUp = () => {
 	)
 }
 
-export default GameSetUp
+export default Init
