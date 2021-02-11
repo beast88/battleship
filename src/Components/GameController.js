@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import player from '../Factories/PlayerFactory'
 import Board from './Board'
 
 const GameController = () => {
-	let player1 = player()
+	const [player1, setPlayer1] = useState(player())
 
 	const [computer, setComputer] = useState(player())
 
@@ -15,8 +15,7 @@ const GameController = () => {
 		)
 
 		setComputer(computer)
-
-		console.log(computer)
+		setPlayer1(player1)
 	}
 
 	const handleClick = (loc) => {
@@ -26,13 +25,21 @@ const GameController = () => {
 		}
 	}
 
-	console.log(player1, computer, switchPlayer)
+	//function with a timeout to handle AI turn
+	useEffect(() => {
+		if(currentPlayer === "computer"){
+			setTimeout(() => {
+				computer.AIFireShot(player1.board)
+				switchPlayer()
+			}, 500)
+		}
+	})
 
 	return(
 		<div className="game-container">
 			<Board 
 				board={player1.board}
-				
+				handleClick={handleClick}				
 			/>
 
 			<Board
