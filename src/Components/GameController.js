@@ -25,6 +25,12 @@ const GameController = () => {
 		}
 	}
 
+	const handlePlayerBoard = () => {
+		if(currentPlayer === "player"){
+			return null
+		}
+	}
+
 	//function with a timeout to handle AI turn
 	useEffect(() => {
 		if(currentPlayer === "computer"){
@@ -35,12 +41,17 @@ const GameController = () => {
 		}
 	})
 
+	//function to player the computer ships at random when the game starts
+	//Maybe use a helper function for this and call it when the begin button is pressed
+
 	return(
 		<div className="game-container">
 			<Board 
 				board={player1.board}
-				handleClick={handleClick}				
+				handleClick={handlePlayerBoard}				
 			/>
+
+			<button>Start Game</button>
 
 			<Board
 				board={computer.board}
