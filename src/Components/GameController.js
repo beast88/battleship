@@ -8,6 +8,8 @@ const GameController = () => {
 
 	const [computer, setComputer] = useState(player())
 
+	const [gameStart, setGameStart] = useState(false)
+
 	const [currentPlayer, setCurrentPlayer] = useState("player")
 
 	const switchPlayer = () => {
@@ -20,14 +22,14 @@ const GameController = () => {
 	}
 
 	const handleShot = (loc) => {
-		if(currentPlayer === "player"){
+		if(currentPlayer === "player" && gameStart === true){
 			player1.fireShot(computer.board, loc)
 			switchPlayer()
 		}
 	}
 
 	const handlePlayerBoard = () => {
-		if(currentPlayer === "player"){
+		if(currentPlayer === "player" && gameStart === true){
 			return null
 		}
 	}
@@ -42,14 +44,14 @@ const GameController = () => {
 		}
 	})
 
-	//function to place the computer ships at random when the game starts
-	//Maybe use a helper function for this and call it when the begin button is pressed
+	//function to place the ships at random when the game starts
 	const handleBegin = () => {
 		placeShips(player1.board)
 		placeShips(computer.board)
 
 		setPlayer1(player1)
 		setComputer(computer)
+		setGameStart(true)
 
 		console.log(player1)
 	}
