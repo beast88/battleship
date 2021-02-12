@@ -155,7 +155,7 @@ const gameboard = () => {
 				placedShips.push(newShip.name)
 
 			} else {
-				return
+				return null
 			}
 		},
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import player from '../Factories/PlayerFactory'
 import Board from './Board'
+import placeShips from '../GameHelpers/placeShips'
 
 const GameController = () => {
 	const [player1, setPlayer1] = useState(player())
@@ -18,7 +19,7 @@ const GameController = () => {
 		setPlayer1(player1)
 	}
 
-	const handleClick = (loc) => {
+	const handleShot = (loc) => {
 		if(currentPlayer === "player"){
 			player1.fireShot(computer.board, loc)
 			switchPlayer()
@@ -41,8 +42,17 @@ const GameController = () => {
 		}
 	})
 
-	//function to player the computer ships at random when the game starts
+	//function to place the computer ships at random when the game starts
 	//Maybe use a helper function for this and call it when the begin button is pressed
+	const handleBegin = () => {
+		placeShips(player1.board)
+		placeShips(computer.board)
+
+		setPlayer1(player1)
+		setComputer(computer)
+
+		console.log(player1)
+	}
 
 	return(
 		<div className="game-container">
@@ -51,11 +61,11 @@ const GameController = () => {
 				handleClick={handlePlayerBoard}				
 			/>
 
-			<button>Start Game</button>
+			<button onClick={() => {handleBegin()}}>Start Game</button>
 
 			<Board
 				board={computer.board}
-				handleClick={handleClick} 
+				handleClick={handleShot} 
 			/>
 		</div>
 	)

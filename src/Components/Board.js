@@ -5,6 +5,7 @@ const Board = (props) => {
 
 	let cells = props.board.board.map((cell, index) => {
 		const hit = cell.isHit ? {background: 'red'} : {}
+		//const ship = cell.hasShip ? {background: 'green'} : {}
 		return <div 
 					className="cell" 
 					key={index} 
