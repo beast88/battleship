@@ -5,12 +5,21 @@ const Board = (props) => {
 
 	let cells = props.player.board.board.map((cell, index) => {
 		const hit = cell.isHit ? {background: 'red'} : {}
+		
+		let playerShip;
+
+		if(props.player.type === 'human' && cell.hasShip === true){
+			playerShip = <div className="ship"></div>
+		}
+
 		return <div 
 					className="cell" 
 					key={index} 
 					onClick={() => {props.handleClick(index)}}
 					style={hit} 
-				></div>
+				>
+					{playerShip}
+				</div>
 	})
 
 	return (
