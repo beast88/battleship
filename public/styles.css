@@ -7,7 +7,24 @@ body {
 }
 
 h1 {
-	
+	font-size: 2.5rem;
+}
+
+.header {
+	text-align: center;
+	height: 10vh;
+	position: relative;
+}
+
+.header h1 {
+	margin-top: 15px;
+}
+
+.fa-github {
+	font-size: 2rem;
+	position: absolute;
+	right: 40px;
+	top: 0;
 }
 
 .game-container {
