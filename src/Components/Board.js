@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 
 const Board = (props) => {
 
-	let cells = props.board.board.map((cell, index) => {
+	let cells = props.player.board.board.map((cell, index) => {
 		const hit = cell.isHit ? {background: 'red'} : {}
-		//const ship = cell.hasShip ? {background: 'green'} : {}
 		return <div 
 					className="cell" 
 					key={index} 
@@ -22,7 +21,7 @@ const Board = (props) => {
 }
 
 Board.propTypes = {
-	board: PropTypes.any,
+	player: PropTypes.any,
 	handleClick: PropTypes.any
 }
 

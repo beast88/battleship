@@ -4,9 +4,9 @@ import Board from './Board'
 import placeShips from '../GameHelpers/placeShips'
 
 const GameController = () => {
-	const [player1, setPlayer1] = useState(player())
+	const [player1, setPlayer1] = useState(player('human'))
 
-	const [computer, setComputer] = useState(player())
+	const [computer, setComputer] = useState(player('AI'))
 
 	const [gameStart, setGameStart] = useState(false)
 
@@ -59,14 +59,14 @@ const GameController = () => {
 	return(
 		<div className="game-container">
 			<Board 
-				board={player1.board}
+				player={player1}
 				handleClick={handlePlayerBoard}				
 			/>
 
 			<button onClick={() => {handleBegin()}}>Start Game</button>
 
 			<Board
-				board={computer.board}
+				player={computer}
 				handleClick={handleShot} 
 			/>
 		</div>

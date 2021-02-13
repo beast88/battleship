@@ -1,9 +1,10 @@
 import gameboard from './GameboardFactory'
 
-const player = () => {
+const player = (type) => {
 	
 	return {
 		board: gameboard(),
+		type: type,
 
 		fireShot(board, loc) {
 			board.receiveAttack(loc)
