@@ -44,10 +44,26 @@ h1 {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+}
+
+.cell-hit {
+	width: 80%;
+	height: 80%;
+	border-radius: 50%;
+	background-color: grey;
+}
+
+.cell-ship-hit {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: red;
 }
 
 .ship {
-	background: grey;
+	background: blue;
 	height: 90%;
 	width: 90%;
 }
