@@ -5,11 +5,8 @@ import placeShips from '../GameHelpers/placeShips'
 
 const GameController = () => {
 	const [player1, setPlayer1] = useState(player('human'))
-
 	const [computer, setComputer] = useState(player('AI'))
-
 	const [gameStart, setGameStart] = useState(false)
-
 	const [currentPlayer, setCurrentPlayer] = useState("player")
 
 	const switchPlayer = () => {
@@ -34,7 +31,7 @@ const GameController = () => {
 		}
 	}
 
-	//function with a timeout to handle AI turn
+	//handle AI turn
 	useEffect(() => {
 		if(currentPlayer === "computer"){
 			setTimeout(() => {
@@ -44,7 +41,7 @@ const GameController = () => {
 		}
 	})
 
-	//function to place the ships at random when the game starts
+	//place the ships at random when the game starts
 	const handleBegin = () => {
 		placeShips(player1.board)
 		placeShips(computer.board)

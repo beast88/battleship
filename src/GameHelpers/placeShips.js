@@ -20,7 +20,7 @@ const placeShips = (board) => {
 	}
 
 	//Iterate through the ship types and place the ship on the board
-	//If the ship placement functions returns null the rerun the function
+	//If the ship placement functions returns null then rerun the function
 	//Recursion
 	const place = (ship) => {
 		if(board.placeShip(randomCell(cells), ship, randomAxis(axis)) === null){
