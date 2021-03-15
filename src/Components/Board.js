@@ -12,7 +12,6 @@ const Board = (props) => {
 
 		//Show enemy ships for testing purposes
 		let enemyShip;
-
 		if(props.player.type === 'AI' && cell.hasShip === true){
 			enemyShip = <div className="ship"></div>
 		}

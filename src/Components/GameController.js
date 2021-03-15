@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import player from '../Factories/PlayerFactory'
 import Board from './Board'
+import GameEnd from './GameEnd'
 import placeShips from '../GameHelpers/placeShips'
+import gameOver from '../GameHelpers/gameover'
 
 const GameController = () => {
 	const [player1, setPlayer1] = useState(player('human'))
 	const [computer, setComputer] = useState(player('AI'))
 	const [gameStart, setGameStart] = useState(false)
-	const [currentPlayer, setCurrentPlayer] = useState("player")
+	const [currentPlayer, setCurrentPlayer] = useState('player')
+	const [endGame, setEndGame] = useState(false)
+	const [winner, setWinner] = useState('')
 
 	const switchPlayer = () => {
 		setCurrentPlayer(
@@ -21,6 +25,14 @@ const GameController = () => {
 	const handleShot = (loc) => {
 		if(currentPlayer === "player" && gameStart === true){
 			player1.fireShot(computer.board, loc)
+
+			if(gameOver(computer.board) === true){
+				setEndGame(true)
+				setWinner('Player')
+			}
+
+			console.log(endGame, winner)
+
 			switchPlayer()
 		}
 	}
@@ -36,6 +48,12 @@ const GameController = () => {
 		if(currentPlayer === "computer"){
 			setTimeout(() => {
 				computer.AIFireShot(player1.board)
+
+				if(gameOver(player1.board) === true){
+					setEndGame(true)
+					setWinner('Computer')
+				}
+
 				switchPlayer()
 			}, 500)
 		}
@@ -65,6 +83,11 @@ const GameController = () => {
 			<Board
 				player={computer}
 				handleClick={handleShot} 
+			/>
+
+			<GameEnd 
+				endGame={endGame}
+				winner={winner}
 			/>
 		</div>
 	)
