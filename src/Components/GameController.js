@@ -17,9 +17,6 @@ const GameController = () => {
 		setCurrentPlayer(
 			currentPlayer === "player" ? "computer" : "player"
 		)
-
-		setComputer(computer)
-		setPlayer1(player1)
 	}
 
 	const handleShot = (loc) => {
@@ -30,8 +27,6 @@ const GameController = () => {
 				setEndGame(true)
 				setWinner('Player')
 			}
-
-			console.log(endGame, winner)
 
 			switchPlayer()
 		}
@@ -63,9 +58,7 @@ const GameController = () => {
 	const handleBegin = () => {
 		placeShips(player1.board)
 		placeShips(computer.board)
-
-		setPlayer1(player1)
-		setComputer(computer)
+		
 		setGameStart(true)
 
 		console.log(player1)
